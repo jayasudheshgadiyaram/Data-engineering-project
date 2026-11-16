@@ -5,19 +5,15 @@ null_customer_id,customer_id,0,PASS
 churn_is_binary,churn,"[0, 1]",PASS
 duplicate_rows,-,0,PASS
 churn_rate,churn,0.3891,PASS
-missing_fraction,nps_recommend,1.0,WARN
-missing_fraction,reported_income,1.0,WARN
-missing_fraction,satisfaction_score,1.0,WARN
-missing_fraction,online_comparison_freq,1.0,WARN
 missing_fraction,days_since_last_contact,0.095,PASS
 missing_fraction,complaint_ratio,0.095,PASS
-missing_fraction,avg_star_rating,0.0362,PASS
 missing_fraction,negative_review_ratio,0.0362,PASS
+missing_fraction,avg_star_rating,0.0362,PASS
 missing_fraction,reviews_per_order,0.0362,PASS
 avg_star_rating_in_1_5,avg_star_rating,"min=1.0, max=4.667",PASS
-nps_in_0_10,nps_recommend,all null,WARN
-satisfaction_in_0_10,satisfaction_score,all null,WARN
-comparison_freq_in_0_10,online_comparison_freq,all null,WARN
+nps_in_0_10,nps_recommend,"min=0, max=10",PASS
+satisfaction_in_0_10,satisfaction_score,"min=0, max=10",PASS
+comparison_freq_in_0_10,online_comparison_freq,"min=0, max=10",PASS
 tenure_non_negative,tenure_days,"min=2, max=313",PASS
 recency_non_negative,days_since_last_order,"min=0, max=313",PASS
 negative_values,-,{'days_since_last_login': 2},FAIL

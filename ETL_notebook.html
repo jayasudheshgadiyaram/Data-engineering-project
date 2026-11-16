@@ -7795,7 +7795,7 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1409a236">
+<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6b89ba22">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7844,7 +7844,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9d97bb92">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=db9d9dc9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7853,8 +7853,10 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Load all raw data sources into a dict of DataFrames."""</span>
     <span class="n">raw</span> <span class="o">=</span> <span class="p">{}</span>
 
+    
     <span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_PATH</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"customer"</span><span class="p">,</span> <span class="s2">"subscription"</span><span class="p">,</span> <span class="s2">"subscription_type"</span><span class="p">,</span> <span class="s2">"product"</span><span class="p">,</span>
                   <span class="s2">"product_category"</span><span class="p">,</span> <span class="s2">"sale"</span><span class="p">,</span> <span class="s2">"sale_product"</span><span class="p">,</span> <span class="s2">"payment"</span><span class="p">,</span>
@@ -7863,6 +7865,7 @@ a.anchor-link {
     <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loaded </span><span class="si">%d</span><span class="s2"> SQLite tables"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
 
+    
     <span class="n">raw</span><span class="p">[</span><span class="s2">"crm"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CRM_PATH</span><span class="p">)</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"CRM report: </span><span class="si">%d</span><span class="s2"> rows"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="s2">"crm"</span><span class="p">]))</span>
 
@@ -7870,6 +7873,7 @@ a.anchor-link {
         <span class="n">LOG_PATH</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">,</span> <span class="s2">"session_id"</span><span class="p">,</span> <span class="s2">"login"</span><span class="p">])</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Server log: </span><span class="si">%d</span><span class="s2"> rows"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="s2">"server_log"</span><span class="p">]))</span>
 
+    
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">SURVEY_PATH</span><span class="p">):</span>
         <span class="n">raw</span><span class="p">[</span><span class="s2">"survey"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SURVEY_PATH</span><span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Survey: </span><span class="si">%d</span><span class="s2"> rows"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="s2">"survey"</span><span class="p">]))</span>
@@ -7877,6 +7881,7 @@ a.anchor-link {
         <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Survey file not found - survey features will be empty"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">raw</span>
+
 
 <span class="n">raw</span> <span class="o">=</span> <span class="n">extract</span><span class="p">()</span>
 <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">raw</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
@@ -7913,7 +7918,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>WARNING: Survey file not found - survey features will be empty
+<pre>INFO: Survey: 221 rows
 </pre>
 </div>
 </div>
@@ -7930,12 +7935,13 @@ a.anchor-link {
  'payment': (23188, 4),
  'product_review': (10990, 5),
  'crm': (7585, 4),
- 'server_log': (67249, 3)}</pre>
+ 'server_log': (67249, 3),
+ 'survey': (221, 5)}</pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=67c21b85">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=30fa9021">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7944,6 +7950,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">download_survey</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Best-effort download of the survey CSV from the UH block storage."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
         <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span>
@@ -7961,7 +7968,7 @@ a.anchor-link {
                 <span class="n">s3</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="s2">"comsci-student-s3-1"</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">SURVEY_PATH</span><span class="p">)</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Downloaded </span><span class="si">%s</span><span class="s2"> -&gt; </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">SURVEY_PATH</span><span class="p">)</span>
                 <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span> 
         <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Survey download failed: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
@@ -7969,7 +7976,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=42a46330">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=09952826">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7978,6 +7985,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">transform_customers</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Base customer table + churn label + subscription attributes."""</span>
     <span class="n">customers</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"customer"</span><span class="p">][[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"email"</span><span class="p">,</span> <span class="s2">"subscription_id"</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
         <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"customer_id"</span><span class="p">})</span>
     <span class="n">subs</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"subscription"</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
@@ -7992,11 +8000,14 @@ a.anchor-link {
           <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">subs</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"subscription_id"</span><span class="p">)</span>
           <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">plans</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"subscription_type_id"</span><span class="p">))</span>
 
+    
     <span class="n">df</span><span class="p">[</span><span class="s2">"churn"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"auto_renew"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"auto_renew"</span><span class="p">,</span> <span class="s2">"subscription_id"</span><span class="p">,</span> <span class="s2">"subscription_type_id"</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">df</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">transform_sales</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Per-customer sales aggregates (RFM-style monetary/frequency features)."""</span>
     <span class="n">sales</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"sale"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">sales</span><span class="p">[</span><span class="s2">"order_date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">"order_date"</span><span class="p">])</span>
     <span class="n">sales</span><span class="p">[</span><span class="s2">"expected_date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">"expected_date"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
@@ -8025,6 +8036,7 @@ a.anchor-link {
         <span class="n">per_customer</span><span class="p">[</span><span class="s2">"late_delivery_count"</span><span class="p">]</span>
         <span class="o">/</span> <span class="n">per_customer</span><span class="p">[</span><span class="s2">"delivered_order_count"</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 
+    
     <span class="n">sp</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"sale_product"</span><span class="p">]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
         <span class="n">raw</span><span class="p">[</span><span class="s2">"sale"</span><span class="p">][[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"customer_id"</span><span class="p">]],</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">"sale_id"</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s2">"id"</span><span class="p">)</span>
     <span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="s2">"product"</span><span class="p">][[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"product_category_id"</span><span class="p">]],</span>
@@ -8037,7 +8049,9 @@ a.anchor-link {
 
     <span class="k">return</span> <span class="n">per_customer</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">basket</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">transform_reviews</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Per-customer product review aggregates."""</span>
     <span class="n">rev</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"product_review"</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">rev</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">)</span>
         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">review_count</span><span class="o">=</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">),</span>
@@ -8047,13 +8061,16 @@ a.anchor-link {
         <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
         <span class="o">.</span><span class="n">round</span><span class="p">({</span><span class="s2">"avg_star_rating"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"negative_review_ratio"</span><span class="p">:</span> <span class="mi">4</span><span class="p">}))</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">transform_crm</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">snapshot_date</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Per-customer customer-service contact features."""</span>
     <span class="n">crm</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"crm"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">crm</span><span class="p">[</span><span class="s2">"contact_row_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">crm</span><span class="o">.</span><span class="n">index</span>
     <span class="n">crm</span><span class="p">[</span><span class="s2">"recieved_datatime"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">crm</span><span class="p">[</span><span class="s2">"recieved_datatime"</span><span class="p">])</span>
     <span class="n">crm</span><span class="p">[</span><span class="s2">"is_complaint"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">crm</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"complaint"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">crm</span><span class="p">[</span><span class="s2">"is_query"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">crm</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"query"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
+    
     <span class="n">crm</span><span class="p">[</span><span class="s2">"platforms"</span><span class="p">]</span> <span class="o">=</span> <span class="n">crm</span><span class="p">[</span><span class="s2">"platform"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
         <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"e-mail"</span><span class="p">,</span> <span class="s2">"live-chat"</span><span class="p">,</span> <span class="s2">"telephone"</span><span class="p">]:</span>
@@ -8075,7 +8092,9 @@ a.anchor-link {
     <span class="n">agg</span> <span class="o">=</span> <span class="n">agg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">recent</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">agg</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">transform_logins</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">snapshot_date</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Per-customer web-app login/session features, keyed via email."""</span>
     <span class="n">logins</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"server_log"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">logins</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">logins</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">])</span>
     <span class="n">logins</span><span class="p">[</span><span class="s2">"login"</span><span class="p">]</span> <span class="o">=</span> <span class="n">logins</span><span class="p">[</span><span class="s2">"login"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -8093,10 +8112,13 @@ a.anchor-link {
     <span class="n">agg</span> <span class="o">=</span> <span class="n">agg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">recent</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"login"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">agg</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">transform_survey</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Survey responses keyed by email; empty frame if file absent."""</span>
     <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"email"</span><span class="p">,</span> <span class="s2">"reported_income"</span><span class="p">,</span> <span class="s2">"nps_recommend"</span><span class="p">,</span>
             <span class="s2">"satisfaction_score"</span><span class="p">,</span> <span class="s2">"online_comparison_freq"</span><span class="p">]</span>
     <span class="k">if</span> <span class="s2">"survey"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">:</span>
+        
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
             <span class="s2">"email"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">),</span>
             <span class="s2">"reported_income"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">),</span>
@@ -8109,7 +8131,8 @@ a.anchor-link {
     <span class="n">sv</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">sv</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
     <span class="n">keep</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">sv</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
     <span class="n">sv</span> <span class="o">=</span> <span class="n">sv</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">"email"</span><span class="p">)</span>
-    <span class="n">sv</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span> <span class="o">=</span> <span class="n">sv</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">sv</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"email"</span><span class="p">:</span> <span class="s2">"_email_key"</span><span class="p">})</span>
+    <span class="n">sv</span><span class="p">[</span><span class="s2">"_email_key"</span><span class="p">]</span> <span class="o">=</span> <span class="n">sv</span><span class="p">[</span><span class="s2">"_email_key"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">keep</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">"email"</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">"reported_income"</span><span class="p">:</span>
             <span class="n">sv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">sv</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
@@ -8120,7 +8143,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0ea3169e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=01146198">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8129,10 +8152,13 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Join all per-customer aggregates and engineer additional features."""</span>
+    
     <span class="n">snapshot_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="s2">"sale"</span><span class="p">][</span><span class="s2">"order_date"</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Snapshot date: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">snapshot_date</span><span class="p">)</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">transform_customers</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"_email_key"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">part</span> <span class="ow">in</span> <span class="p">[</span>
         <span class="p">(</span><span class="s2">"sales"</span><span class="p">,</span> <span class="n">transform_sales</span><span class="p">(</span><span class="n">raw</span><span class="p">)),</span>
@@ -8140,10 +8166,11 @@ a.anchor-link {
         <span class="p">(</span><span class="s2">"crm"</span><span class="p">,</span> <span class="n">transform_crm</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">snapshot_date</span><span class="p">)),</span>
         <span class="p">(</span><span class="s2">"survey"</span><span class="p">,</span> <span class="n">transform_survey</span><span class="p">(</span><span class="n">raw</span><span class="p">)),</span>
     <span class="p">]:</span>
-        <span class="n">on</span> <span class="o">=</span> <span class="s2">"email"</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"survey"</span> <span class="k">else</span> <span class="s2">"customer_id"</span>
+        <span class="n">on</span> <span class="o">=</span> <span class="s2">"_email_key"</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"survey"</span> <span class="k">else</span> <span class="s2">"customer_id"</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">on</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Joined </span><span class="si">%s</span><span class="s2"> -&gt; shape </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
+    
     <span class="n">logins</span> <span class="o">=</span> <span class="n">transform_logins</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">snapshot_date</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"login"</span><span class="p">:</span> <span class="s2">"email"</span><span class="p">})</span>
     <span class="n">email_map</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"email"</span><span class="p">]]</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
         <span class="n">email</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
@@ -8159,6 +8186,7 @@ a.anchor-link {
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">logins_agg</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Joined logins -&gt; shape </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
+    
     <span class="n">df</span><span class="p">[</span><span class="s2">"subscription_start"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"subscription_start"</span><span class="p">])</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">"subscription_end"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"subscription_end"</span><span class="p">])</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">"tenure_days"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">snapshot_date</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">"subscription_start"</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
@@ -8174,6 +8202,7 @@ a.anchor-link {
     <span class="n">df</span><span class="p">[</span><span class="s2">"days_since_last_contact"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">snapshot_date</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"last_contact_date"</span><span class="p">]))</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
 
+    
     <span class="n">df</span><span class="p">[</span><span class="s2">"complaint_ratio"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"complaint_count"</span><span class="p">]</span>
                              <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">"contact_count"</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">"items_per_order"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"items_purchased"</span><span class="p">]</span>
@@ -8183,6 +8212,7 @@ a.anchor-link {
     <span class="n">df</span><span class="p">[</span><span class="s2">"logins_per_order"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"login_count"</span><span class="p">]</span>
                               <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">"order_count"</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 
+    
     <span class="n">count_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s2">"_count"</span><span class="p">,</span> <span class="s2">"_days"</span><span class="p">))</span>
                   <span class="ow">or</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"order_count"</span><span class="p">,</span> <span class="s2">"contact_count"</span><span class="p">,</span> <span class="s2">"login_count"</span><span class="p">,</span>
                            <span class="s2">"active_days"</span><span class="p">,</span> <span class="s2">"session_count"</span><span class="p">,</span> <span class="s2">"items_purchased"</span><span class="p">,</span>
@@ -8193,15 +8223,19 @@ a.anchor-link {
                            <span class="s2">"complaint_count"</span><span class="p">,</span> <span class="s2">"query_count"</span><span class="p">)]</span>
     <span class="n">df</span><span class="p">[</span><span class="n">count_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">count_cols</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
+    
     <span class="n">df</span><span class="p">[</span><span class="s2">"survey_responded"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"survey_responded"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
+    
     <span class="n">drop_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"subscription_start"</span><span class="p">,</span> <span class="s2">"subscription_end"</span><span class="p">,</span> <span class="s2">"first_order_date"</span><span class="p">,</span>
                  <span class="s2">"last_order_date"</span><span class="p">,</span> <span class="s2">"first_login"</span><span class="p">,</span> <span class="s2">"last_login"</span><span class="p">,</span>
-                 <span class="s2">"last_contact_date"</span><span class="p">,</span> <span class="s2">"email"</span><span class="p">]</span>
+                 <span class="s2">"last_contact_date"</span><span class="p">,</span> <span class="s2">"email"</span><span class="p">,</span> <span class="s2">"_email_key"</span><span class="p">]</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">drop_cols</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">snapshot_date</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">data_quality_checks</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">snapshot_date</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Run a battery of checks and return a tidy report DataFrame."""</span>
     <span class="n">checks</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">"PASS"</span><span class="p">):</span>
@@ -8221,11 +8255,13 @@ a.anchor-link {
         <span class="s2">"PASS"</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"FAIL"</span><span class="p">)</span>
     <span class="n">add</span><span class="p">(</span><span class="s2">"churn_rate"</span><span class="p">,</span> <span class="s2">"churn"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"churn"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">))</span>
 
+    
     <span class="n">missing</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">frac</span> <span class="ow">in</span> <span class="n">missing</span><span class="p">[</span><span class="n">missing</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">add</span><span class="p">(</span><span class="s2">"missing_fraction"</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">frac</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
             <span class="s2">"PASS"</span> <span class="k">if</span> <span class="n">frac</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s2">"WARN"</span><span class="p">)</span>
 
+    
     <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span>
         <span class="p">(</span><span class="s2">"avg_star_rating"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"avg_star_rating_in_1_5"</span><span class="p">),</span>
         <span class="p">(</span><span class="s2">"nps_recommend"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"nps_in_0_10"</span><span class="p">),</span>
@@ -8244,6 +8280,7 @@ a.anchor-link {
         <span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"min=</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">, max=</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
             <span class="s2">"PASS"</span> <span class="k">if</span> <span class="n">ok</span> <span class="k">else</span> <span class="s2">"FAIL"</span><span class="p">)</span>
 
+   
     <span class="n">neg</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_numeric_dtype</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">c</span><span class="p">])}</span>
     <span class="n">neg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neg</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">}</span>
@@ -8252,8 +8289,10 @@ a.anchor-link {
 
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">checks</span><span class="p">)</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">quality_report</span><span class="p">):</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">PARQUET_PATH</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Persist the final dataset as Parquet plus the quality report."""</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">PARQUET_PATH</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"fastparquet"</span><span class="p">)</span>
     <span class="n">quality_report</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">QUALITY_PATH</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Wrote </span><span class="si">%s</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> rows, </span><span class="si">%d</span><span class="s2"> cols)"</span><span class="p">,</span> <span class="n">PARQUET_PATH</span><span class="p">,</span> <span class="o">*</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">PARQUET_PATH</span>
@@ -8262,7 +8301,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a192dc9e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=43650099">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8296,35 +8335,43 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>INFO: Joined sales -&gt; shape (221, 19)
+<pre>INFO: Joined sales -&gt; shape (221, 20)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>INFO: Joined reviews -&gt; shape (221, 22)
+<pre>INFO: Joined reviews -&gt; shape (221, 23)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>INFO: Joined crm -&gt; shape (221, 30)
+<pre>INFO: Joined crm -&gt; shape (221, 31)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>INFO: Joined survey -&gt; shape (221, 35)
+<pre>INFO: Joined survey -&gt; shape (221, 36)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>INFO: Joined logins -&gt; shape (221, 41)
+<pre>INFO: Joined logins -&gt; shape (221, 42)
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\JAYA SUDHESH\AppData\Local\Temp\ipykernel_13552\3955306476.py:142: Pandas4Warning: The 'fastparquet' engine is deprecated and will be removed in a future version. Use 'pyarrow' instead.
+  df.to_parquet(PARQUET_PATH, index=False, engine="fastparquet")
 </pre>
 </div>
 </div>
@@ -8416,110 +8463,82 @@ Churn rate: 38.9%  (1 = cancelled auto-renewal)
 <tr>
 <th>6</th>
 <td>missing_fraction</td>
-<td>nps_recommend</td>
-<td>1.0</td>
-<td>WARN</td>
-</tr>
-<tr>
-<th>7</th>
-<td>missing_fraction</td>
-<td>reported_income</td>
-<td>1.0</td>
-<td>WARN</td>
-</tr>
-<tr>
-<th>8</th>
-<td>missing_fraction</td>
-<td>satisfaction_score</td>
-<td>1.0</td>
-<td>WARN</td>
-</tr>
-<tr>
-<th>9</th>
-<td>missing_fraction</td>
-<td>online_comparison_freq</td>
-<td>1.0</td>
-<td>WARN</td>
-</tr>
-<tr>
-<th>10</th>
-<td>missing_fraction</td>
 <td>days_since_last_contact</td>
 <td>0.095</td>
 <td>PASS</td>
 </tr>
 <tr>
-<th>11</th>
+<th>7</th>
 <td>missing_fraction</td>
 <td>complaint_ratio</td>
 <td>0.095</td>
 <td>PASS</td>
 </tr>
 <tr>
-<th>12</th>
-<td>missing_fraction</td>
-<td>avg_star_rating</td>
-<td>0.0362</td>
-<td>PASS</td>
-</tr>
-<tr>
-<th>13</th>
+<th>8</th>
 <td>missing_fraction</td>
 <td>negative_review_ratio</td>
 <td>0.0362</td>
 <td>PASS</td>
 </tr>
 <tr>
-<th>14</th>
+<th>9</th>
+<td>missing_fraction</td>
+<td>avg_star_rating</td>
+<td>0.0362</td>
+<td>PASS</td>
+</tr>
+<tr>
+<th>10</th>
 <td>missing_fraction</td>
 <td>reviews_per_order</td>
 <td>0.0362</td>
 <td>PASS</td>
 </tr>
 <tr>
-<th>15</th>
+<th>11</th>
 <td>avg_star_rating_in_1_5</td>
 <td>avg_star_rating</td>
 <td>min=1.0, max=4.667</td>
 <td>PASS</td>
 </tr>
 <tr>
-<th>16</th>
+<th>12</th>
 <td>nps_in_0_10</td>
 <td>nps_recommend</td>
-<td>all null</td>
-<td>WARN</td>
+<td>min=0, max=10</td>
+<td>PASS</td>
 </tr>
 <tr>
-<th>17</th>
+<th>13</th>
 <td>satisfaction_in_0_10</td>
 <td>satisfaction_score</td>
-<td>all null</td>
-<td>WARN</td>
+<td>min=0, max=10</td>
+<td>PASS</td>
 </tr>
 <tr>
-<th>18</th>
+<th>14</th>
 <td>comparison_freq_in_0_10</td>
 <td>online_comparison_freq</td>
-<td>all null</td>
-<td>WARN</td>
+<td>min=0, max=10</td>
+<td>PASS</td>
 </tr>
 <tr>
-<th>19</th>
+<th>15</th>
 <td>tenure_non_negative</td>
 <td>tenure_days</td>
 <td>min=2, max=313</td>
 <td>PASS</td>
 </tr>
 <tr>
-<th>20</th>
+<th>16</th>
 <td>recency_non_negative</td>
 <td>days_since_last_order</td>
 <td>min=0, max=313</td>
 <td>PASS</td>
 </tr>
 <tr>
-<th>21</th>
+<th>17</th>
 <td>negative_values</td>
 <td>-</td>
 <td>{'days_since_last_login': 2}</td>
@@ -8532,7 +8551,7 @@ Churn rate: 38.9%  (1 = cancelled auto-renewal)
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e6459d3d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=aa17e1a4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8898,68 +8917,68 @@ Churn rate: 38.9%  (1 = cancelled auto-renewal)
 </tr>
 <tr>
 <th>reported_income</th>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
+<td>26k-30k</td>
+<td>34k-38k</td>
+<td>26k-30k</td>
+<td>198k-200k+</td>
+<td>42k-46k</td>
+<td>22k-26k</td>
+<td>38k-42k</td>
+<td>18k-22k</td>
+<td>54k-58k</td>
+<td>46k-50k</td>
 </tr>
 <tr>
 <th>nps_recommend</th>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>8</td>
+<td>5</td>
+<td>9</td>
+<td>9</td>
+<td>0</td>
+<td>1</td>
+<td>8</td>
+<td>8</td>
+<td>2</td>
+<td>2</td>
 </tr>
 <tr>
 <th>satisfaction_score</th>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>6</td>
+<td>8</td>
+<td>5</td>
+<td>3</td>
+<td>8</td>
+<td>7</td>
+<td>9</td>
+<td>9</td>
+<td>7</td>
+<td>1</td>
 </tr>
 <tr>
 <th>online_comparison_freq</th>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>5</td>
+<td>9</td>
+<td>5</td>
+<td>5</td>
+<td>10</td>
+<td>7</td>
+<td>6</td>
+<td>2</td>
+<td>10</td>
+<td>8</td>
 </tr>
 <tr>
 <th>survey_responded</th>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
 </tr>
 <tr>
 <th>login_count</th>
